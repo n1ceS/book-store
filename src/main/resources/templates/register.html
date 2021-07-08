@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="scripts/login.js" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+        <div class="logo">
+            <a href="/"><img src="img/logo.png"></a>
+        </div>
+        <div class="container">
+            <img class="left_wave" src="img/left_wave.png" alt="left wave ">
+            <div class="img">
+                <img src="img/register_person.svg" alt="">
+            </div>
+            <div class="section-login">
+                <form method="POST" action="#" th:action="@{/register}" th:object="${user}" enctype="utf8">
+                    <img src="img/register_avatar.svg" alt="avatar" class="avatar">
+                    <h2>Rejestracja</h2>
+                    <div class="input-div login">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h5>Nazwa użytkownika</h5>
+                            <input type="text" th:field="*{username}" class="input"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('username')}" th:errors="*{username}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div login">
+                        <div class="i">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h5>Adres email</h5>
+                           <input type="email" class="input" th:field="*{email}" />
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('email')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div firstname">
+                        <div class="i">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div>
+                            <h5>Imię</h5>
+                          <input type="text" class="input" th:field="*{firstName}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('firstName')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div lastname">
+                        <div class="i">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div>
+                            <h5>Nazwisko</h5>
+                            <input type="text" class="input" th:field="*{lastName}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('lastName')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h5>Telefon</h5>
+                            <input type="text" class="input" th:field="*{phone}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('phone')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <div>
+                            <h5>Ulica</h5>
+                            <input type="text" class="input" th:field="*{street}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('street')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div>
+                            <h5>Miasto</h5>
+                            <input type="text" class="input" th:field="*{city}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('city')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-500px"></i>
+                        </div>
+                        <div>
+                            <h5>Kod pocztowy</h5>
+                            <input type="text" class="input" th:field="*{zip}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('zip')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div>
+                            <h5>Hasło</h5>
+                            <input type="password" class="input" th:field="*{password}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('password')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <div>
+                            <h5>Potwierdź hasło</h5>
+                            <input type="password" class="input" th:field="*{matchingPassword}"/>
+                        </div>
+                    </div>
+                    <div>
+                        <p th:each="error: ${#fields.errors('global')}"
+                           th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                    </div>
+                    <div class="buttonHolder">
+
+<!--                        <div class="alert alert-danger" th:if="${#fields.hasErrors('*')}">-->
+<!--                            <p th:class="${#fields}" th:each="err : ${#fields.errors('*')}" th:text="${err}"></p>-->
+<!--                        </div>-->
+                        <a href="/login">Zaloguj się</a>
+                        <input type="submit" value="Zarejestruj" class="submit-button">
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </body>
+</html>

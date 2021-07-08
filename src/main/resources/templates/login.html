@@ -1,0 +1,65 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title tiles:fragment="title">Logowanie</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="scripts/login.js" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="logo">
+    <a href="/"><img src="img/logo.png"></a>
+</div>
+<div class="content" tiles:fragment="content">
+    <img class="left_wave" src="img/left_wave.png" alt="left wave">
+    <div class="container">
+        <div class="img">
+            <img src="img/person.svg" alt="">
+        </div>
+        <div class="section-login">
+            <form method="POST" name="f" th:action="@{/login}">
+                <img src="img/avatar.svg" alt="avatar" class="avatar">
+
+                <fieldset>
+                    <legend><h2>Logowanie</h2></legend>
+                    <!--/*@thymesVar id="successRegistration" type="java.lang.Boolean"*/-->
+                    <p th:if="${successRegistration}" class="validation-success"> Zarejestrowano. Możesz teraz się zalogować!</p>
+                    <div class="input-div login">
+                        <div class="i">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div>
+                            <h5>Nazwa użytkownika</h5>
+                            <input type="text" class="input" id="username" name="username">
+                        </div>
+                    </div>
+                    <div class="input-div password">
+                        <div class="i">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div>
+                            <h5>Hasło</h5>
+                             <input type="password" class="input" id="password" name="password">
+                        </div>
+                    </div>
+                    <p th:if="${param.error}" class="validation-error"> Nieprawidłowe dane logowania!</p>
+                    <p th:if="${param.logout}" class="validation-error"> Zostałeś wylogowany!</p>
+                    <a href="/register">Zarejestruj się</a>
+                    <div class="buttonHolder">
+                        <input type="submit" value="Zaloguj" class="submit-button">
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+
+</html>

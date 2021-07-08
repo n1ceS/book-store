@@ -1,0 +1,104 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Nunito', sans-serif;
+
+        }
+        .success-logo {
+            width: 200px;
+            height: 200px;
+        }
+
+        .top-banner{
+            width: 100%;
+            background-color: #A063FF;
+            padding: 20px;
+
+        }
+
+        .top-banner.t1 {
+            margin-bottom: 20px;
+        }
+
+        .top-banner.t2 {
+            margin-top: 20px;
+        }
+
+        .top-banner p{
+            color:#fff;
+            letter-spacing: 3px;
+            font-size: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .success-container {
+            width: 100%;
+            display: block;
+            margin:0 auto;
+            text-align: center;
+        }
+
+        .success-container h1{
+            font-weight: bold;
+        }
+        .success-container h2 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        .success-container h3 {
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+        .continue-link {
+            position: relative;
+            top: 30px;
+            text-decoration: none;
+            padding: 15px 50px;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: 700;
+            color:#fff;
+            background-color: #A063FF;
+        }
+
+        .highlighted {
+            color:#8d32a8;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+<div class="success-container">
+    <div class="top-banner t1">
+        <p>Biblioteka Book-Store</p>
+    </div>
+    <h1>Witaj <span class="highlighted" th:text="${firstName} + ' ' + ${lastName}"></span>, </h1>
+    <h2>Wysyłamy Ci potwierdzenie zakupu!</h2>
+    <div th:each="order : ${orderLines}">
+        <h3><strong>Tytuł:</strong> <span class="highlighted" th:text="${order.book.title}"></span></h3>
+        <h3><strong>Autor:</strong> <span class="highlighted"th:text="${order.book.author.firstName} + ' ' + ${order.book.author.lastName}"></span></h3>
+        <h3><strong>Zakupiona ilość: </strong><span class="highlighted" th:text="${order.quantity}"></span></h3>
+        <h3><strong>Cena:  </strong><span class="highlighted" th:text="${order.orderLineCost}"></span></h3>
+    </div>
+    <h3>Suma: <strong th:text="${totalCost}">0</strong> zł</h3>
+    <h3>Pozdrawiamy, <br> Zespół <strong>QRLibrary</strong> </h3>
+    <div class="top-banner t2">
+        <p>Biblioteka Book-Store</p>
+    </div>
+</div>
+<script src="" async defer></script>
+</body>
+</html>

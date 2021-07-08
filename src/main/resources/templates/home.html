@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="/"><img src="img/logo.png"></a>
+                </div>
+                <div class="navigation">
+                    <ul class="navigation__list">
+                        <li class="navigation__item"><a class="link" href="#main-content">Strona Główna</a></li>
+                        <li class="navigation__item"><a class="link" href="#about-services">Jak to działa?</a></li>
+                        <li class="navigation__item"><a class="link" href="#requirements">Warunki</a></li>
+                        <li class="navigation__item"><a class="link" href="#contact">Kontakt</a></li>
+                        <li class="navigation__item" sec:authorize="isAuthenticated()"><a class="link" href="/dashboard">Panel</a></li>
+                        <li sec:authorize="isAnonymous()" class="navigation__item "><a class ="login-btn" href="/login">Zaloguj</a></li>
+                        <li sec:authorize="isAuthenticated()" class="navigation__item "><a class ="login-btn" href="/logout">Wyloguj</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main-content" id="main-content">
+            <div class="banner" id="banner">
+                <div class="app-text">
+                    <h3>Biblioteka dla każdego</h3>
+                    <h1>"Kto czyta, żyje podwójnie."</h1>
+                    <p>Kupowanie książek jeszcze nigdy nie było tak łatwe! <br>Wybierz swoją swoją książkę i czytaj!</p>
+
+                    <div class="btn-group">
+                        <a href="/dashboard" class="signup-btn">Zaczynamy!</a>
+                    </div>
+                </div>
+                <div class="app-picture">
+                    <img src="img/home_library.png" alt="library picture">
+                </div>
+
+            </div>
+        </div>
+        <div class="about-services" id="about-services">
+            <ul>
+                <li>
+                    <img src="img/find_your_book.png" alt="">
+                    <h1>Znajdź książkę</h1>
+                    <p>Posiadamy thrillery, książki fantasy, romanse, horrory czy książki biograficzne.<br> Na pewno znajdziesz coś dla Siebie! </p>
+                </li>
+
+                <li>
+                    <img src="img/get_qrcode.png" alt="">
+                    <h1>Złóż zamówienie</h1>
+                    <p>Po pomyślnym złożeniu zamówienia<br> dostaniesz maila z danymi do przelewu, dzięki któremu w prosty sposób je opłacisz!</p>
+                </li>
+
+                <li>
+                    <img src="img/book_reading.png" alt="">
+                    <h1>Odbierz książki</h1>
+                    <p>Przyjdź do wybranego punktu, odbierz zamówienie i zacznij czytać!</p>
+                </li>
+            </ul>
+        </div>
+        <div class="requirements-container" id="requirements">
+            <h1>Kilka zasad</h1>
+            <div class="requirements-box">
+                <div class="box">
+                    <div class="number-icon">
+                        <div class="icon">
+                            <span class="number">1</span>
+                        </div>
+                    </div>
+                    <h2>Zarejestrowane konto</h2>
+                    <p>Chcąć korzystać z naszego serwisu, musisz posiadać <strong>aktywne konto</strong>.
+                        Na szczęście proces całej rejestracji trwa kilka minut.</p>
+                </div>
+                <div class="box">
+                    <div class="number-icon">
+                        <div class="icon">
+                            <span class="number">2</span>
+                        </div>
+                    </div>
+                    <h2>Dane</h2>
+                    <p>Dane przechowywane w serwisie są na potrzeby wysyłki do  <strong>Ciebie</strong>.
+                        Pamiętaj o tym i wypełniaj je zgodnie z prawdą, inaczej paczka może do Ciebie nie dotrzeć!
+                    </p>
+                </div>
+
+                <div class="box">
+                    <div class="number-icon">
+                        <div class="icon">
+                            <span class="number">3</span>
+                        </div>
+                    </div>
+                    <h2>Ograniczony czas</h2>
+                    <p>Musisz wiedzieć, że zamówienie musi zostać opłacone.
+                        Składając zamówienie, jesteś zobowiązany/a do jego opłacenia z góry bądź za pobraniem. W przypadku zapłaty z góry masz na to <strong>7</strong> dni.
+                    </p>
+                </div>
+
+                <div class="box">
+                    <div class="number-icon">
+                        <div class="icon">
+                            <span class="number">4</span>
+                        </div>
+                    </div>
+                    <h2>Szacunek</h2>
+                    <p>Chcemy, aby nasze książki <strong>służyły wam</strong> jak najdłużej, dlatego
+                        jesteś zobowiązany do dbania zakupionych <strong>książek</strong>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="contact" id="contact">
+            <div class="contact-box" >
+                <div class="about-us">
+                    <h2 class="contact-title">O nas</h2>
+                    <p>
+                        BookStore oferuje możliwość zakupu książek i ich dostawę.
+                        W naszej bazie posiadamy ponad 3400 egzemplarzy książek. Posiadamy thrillery, książki fantasy,
+                        romanse, horrory czy książki biograficzne.
+                        W razie jakichkolwiek pytań prosimy o kontakt mailowy lub telefoniczny.
+
+                    </p>
+                </div>
+                <div class="contact-details-box">
+                    <h2 class="contact-title">Lokalizacja</h2>
+                    <div class="contact-details">
+                        <img src="img/contact_home_icon.png" />
+                        <p>ul. Radziszewskiego 10 <br> 20-400 Lublin</p>
+                    </div>
+                    <div class="contact-details">
+                        <img src="img/contact_telephone_icon.png" />
+                        <p>+48 123 456 789</p>
+                    </div>
+                    <div class="contact-details">
+                        <img src="img/contact_message_icon.png" />
+                        <p>email@emailservice.com</p>
+                    </div>
+                </div>
+                <div class="contact-map-box">
+                    <div style="width: 100%"><iframe width="500" height="400" frameborder="0" scrolling="no"
+                                                     marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=500&amp;height=400&amp;hl=en&amp;q=ul.%20Radziszewskiego%2010+(WYDZIA%C5%81%20MATEMATYKI,%20FIZYKI%20I%20INFORMATYKI)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="footer">
+                <h3>&copy 2021 Michał Marczuk </h3>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

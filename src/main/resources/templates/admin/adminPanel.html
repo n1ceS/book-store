@@ -1,0 +1,56 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title tiles:fragment="title">Panel Główny</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<body>
+<div class="container">
+    <div class="header">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/"><img src="img/logo.png"></a>
+            </div>
+            <div class="navigation">
+                <ul class="navigation__list">
+                    <li class="navigation__item "><a class="link active" href="/dashboard">Strona Główna</a></li>
+                    <li class="navigation__item"><a class="link" href="/books">Książki</a></li>
+                    <li class="navigation__item"><a class="link" href="/orders">Zamówienia</a></li>
+                    <li class="navigation__item"><a class="link" href="/settings">Ustawienia</a></li>
+                    <li class="navigation__item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a class="link admin" href="/admin">Panel Admina</a></li>
+                    <li class="navigation__item "><a class ="login-btn" href="/logout">Wyloguj</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+        </div>
+            <h1 class="h1-ranking">Panel Administracyjny</h1>
+            <div class="row">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <a href="/books"> <h3 class="m-b-20">Zarządzaj książkami</h3></a>
+                    </div>
+                </div>
+
+                <div class="card bg-c-green order-card">
+                    <div class="card-block ">
+                        <a href="/authors"> <h3 class="m-b-20">Zarządzaj autorami</h3></a>
+                    </div>
+                </div>
+
+                <div class="card bg-c-yellow order-card">
+                    <div class="card-block">
+                        <a href="/categories"> <h3 class="m-b-20">Zarządzaj kategoriami</h3></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dodawanie autora</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <script type="text/javascript" th:src="@{/scripts/login.js}" async defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="logo">
+    <a href="/"><img th:src="@{/img/logo.png}" ></a>
+</div>
+<div class="container">
+    <img class="left_wave" th:src="@{/img/left_wave.png}" alt="left wave ">
+    <div class="img">
+        <img th:src="@{/img/book.svg}" alt="">
+    </div>
+    <div class="section-login">
+        <form method="POST" action="#" th:action="@{/authors/add}" th:object="${author}" enctype="multipart/form-data">
+            <img th:src="@{/img/add_edit_book.svg}" alt="avatar" class="avatar">
+            <h2>Dodawanie autora</h2>
+            <div class="input-div login">
+                <div class="i">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                    <h5>Imię</h5>
+                    <input type="text" class="input" th:field="*{firstName}" />
+                </div>
+            </div>
+            <div>
+                <p th:each="error: ${#fields.errors('firstName')}"
+                   th:text="${error}" class="validation-error">Błąd walidacji!</p>
+            </div>
+            <div class="input-div firstname">
+                <div class="i">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <div>
+                    <h5>Nazwisko</h5>
+                    <input type="text" class="input" th:field="*{lastName}"/>
+                </div>
+            </div>
+            <div>
+                <p th:each="error: ${#fields.errors('lastName')}"
+                   th:text="${error}" class="validation-error">Błąd walidacji!</p>
+            </div>
+            <div class="buttonHolder">
+                <input type="submit" value="Dodaj" class="submit-button">
+            </div>
+
+        </form>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

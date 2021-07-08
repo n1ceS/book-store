@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/settings.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/"><img th:src="@{/img/logo.png}"></a>
+            </div>
+            <div class="navigation">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a class="link" href="/dashboard">Strona Główna</a></li>
+                    <li class="navigation__item"><a class="link" href="/books">Książki</a></li>
+                    <li class="navigation__item"><a class="link" href="/orders">Zamówienia</a></li>
+                    <li class="navigation__item"><a class="link active" href="/settings">Ustawienia</a></li>
+                    <li class="navigation__item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a class="link admin" href="/admin">Panel Admina</a></li>
+                    <li class="navigation__item "><a class ="login-btn" href="/logout">Wyloguj</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="popup">
+    <div class="popup-form">
+        <img th:src="@{/img/close_icon.png}" id="close-popup-button" />
+        <form method="post" name="update-password" id="update-password-form">
+            <input type='hidden' name='action' value='personal-password'>
+            <h1>Zmiana hasła</h1>
+            <label for="current-password" class="input-label">Aktualne hasło</label>
+            <input required="required" type="password" name="current-password" id="current-password" />
+            <label for="new-password" class="input-label">Nowe Hasło</label>
+            <input required="required" type="password" name="new-password" id="new-password"/>
+            <label for="new-repeated-password" class="input-label">Powtórz hasło</label>
+            <input required="required" type="password" name="new-repeated-password" id="new-repeated-password"/>
+            <span id='message'></span>
+            <input class="submit-button" id="update-password-submit" type="submit" value="Aktualizuj" name="personal-password"/>
+        </form>
+    </div>
+</div>
+<div class="settings-container">
+    <div class="settings-panel">
+        <div class="info-left-side">
+            <img th:src="@{img/settings_image.svg}" alt="" />
+            <h1>Kilka uwag</h1>
+            <div class="info">
+                <h3>Lorem, ipsum dolor.</h3>
+                <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab aspernatur ipsa porro eius accusantium nam in ut id ex debitis! Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus!</p>
+                <h3>Lorem, ipsum dolor.</h3>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus!</p>
+            </div>
+            <p class="change-password" id="change-password-button">Zmień Hasło</p>
+        </div>
+        <div class="details-right-side">
+            <!--/*@thymesVar id="updateSuccess" type="java.lang.Boolean"*/-->
+            <h4 class="update-success" th:if="${updateSuccess}">Pomyślnie zaaktulizowano dane użytkownika!</h4>
+            <form method="POST" th:action="@{/settings}" th:object="${user}">
+                <input type='hidden' name='action' value='personal-information'>
+                <input required="required" type="hidden" name="username" th:value="${user.username}"/>
+                <input required="required" type="hidden" name="password" th:value="pass"/>
+                <input required="required" type="hidden" name="matchingPassword" th:value="pass"/>
+                <label for="first_name" class="input-label">Imię</label>
+                <input required="required" type="text" name="firstName" th:field="*{firstName}" th:value="${user.firstName}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('firstName')}" th:errors="*{firstName}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+                <label for="last_name" class="input-label">Nazwisko</label>
+                <input required="required" type="text" name="lastName"  th:field="*{lastName}" th:value="${user.lastName}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('lastName')}" th:errors="*{lastName}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+                <label for="email" class="input-label">Adres email</label>
+                <input type="text" name="email" th:field="*{email}" th:value="${user.email}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('email')}" th:errors="*{email}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+                <label for="telephone" class="input-label">Telefon</label>
+                <input required="required" type="tel" name="phone" th:field="*{phone}" th:value="${user.phone}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('phone')}" th:errors="*{phone}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+                <label for="city" class="input-label">Miasto</label>
+                <input required="required" type="tel" name="city" th:field="*{city}" th:value="${user.city}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('city')}" th:errors="*{city}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+                <label for="street" class="input-label">Ulica</label>
+                <input required="required" type="tel" name="street" th:field="*{street}" th:value="${user.street}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('street')}" th:errors="*{street}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+                <label for="zip" class="input-label">Kod pocztowy</label>
+                <input required="required" type="tel" name="zip" th:field="*{zip}" th:value="${user.zip}"/>
+                <div>
+                    <p th:each="error: ${#fields.errors('zip')}" th:errors="*{zip}"
+                       th:text="${error}" class="validation-error">Błąd walidacji!</p>
+                </div>
+
+                <button class="submit-button" type="submit" value="Aktualizuj" name="personal-information">Aktualizuj</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@rc/dist/js.cookie.min.js"></script>
+<script th:src="@{/scripts/settings.js}"></script>
+</body>
+</html>

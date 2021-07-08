@@ -1,0 +1,88 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title tiles:fragment="title">Książki</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/shoppingCart.css}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/"><img th:src="@{/img/logo.png}"></a>
+            </div>
+            <div class="navigation">
+                <ul class="navigation__list">
+                    <li class="navigation__item"><a class="link" href="/dashboard">Strona Główna</a></li>
+                    <li class="navigation__item"><a class="link " href="/books">Książki</a></li>
+                    <li class="navigation__item"><a class="link" href="/orders">Zamówienia</a></li>
+                    <li class="navigation__item"><a class="link" href="/settings">Ustawienia</a></li>
+                    <li class="navigation__item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a class="link admin" href="/admin">Panel Admina</a></li>
+                    <li class="navigation__item"><a href="/shoppingCart"><i class="fas fa-shopping-cart cart active"></i><b class="items-counter" th:if="${itemsCount} > 0" th:text="${itemsCount}"></b></a></li>
+                    <li class="navigation__item "><a class ="login-btn" href="/logout">Wyloguj</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="book-table">
+    <h1 class="user-header">Koszyk użytkownika <span sec:authentication="name"></span></h1>
+    <div class="user-header" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
+    <table class="content-table">
+        <thead th:if="${books.size()} > 0">
+        <tr>
+            <th></th>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Kategoria</th>
+            <th>Dostępna ilość</th>
+            <th>Rok</th>
+            <th>Publikacja</th>
+            <th>Cena</th>
+            <th>Zamówiona ilość</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <div th:if="${books.size()} == 0" class="empty-table">
+            <img th:src="@{img/empty_table.svg}"/>
+            <h1>Nic tu nie ma.</h1>
+        </div>
+        <tr th:each="book : ${books.entrySet()}">
+            <th class="image"><img th:src="@{/img/book-images/{photo}(photo=${book.getKey()?.photo})}" alt=""></th>
+            <th th:text="${book.getKey().title}"></th>
+            <th th:text="${book.getKey().author.firstName} + ' ' + ${book.getKey().author.lastName}"></th>
+            <th th:text="${book.getKey().category.name}"></th>
+            <th th:text="${book.getKey().quantity}"></th>
+            <th th:text="${book.getKey().publication_year}"></th>
+            <th th:text="${book.getKey().publisher.name}"></th>
+            <th th:text="${book.getKey().price}"></th>
+            <th th:text="${book.getValue()}"></th>
+            <th>
+                <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                <a th:href="@{'/shoppingCart/remove/{isbn}'(isbn=${book.getKey().isbn})}" class="reserve-button delete">
+                    Usuń
+                </a>
+            </th>
+        </tr>
+        </tbody>
+
+    </table>
+    <div th:if="${books.size()} > 0" class="checkout-div">
+        <p class="order-sum">Suma: <b th:text="${total}"></b> zł</p>
+
+        <a th:href="@{'/shoppingCart/checkout'}" class="col-md-1">
+            <button type="button" class="login-btn" th:text="Zamawiam">Zamawiam</button>
+        </a>
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title tiles:fragment="title">Książki</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/books.css}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <div class="navbar">
+                    <div class="logo">
+                        <a href="/"><img th:src="@{/img/logo.png}"></a>
+                    </div>
+                    <div class="navigation">
+                        <ul class="navigation__list">
+                            <li class="navigation__item"><a class="link" href="/dashboard">Strona Główna</a></li>
+                            <li class="navigation__item"><a class="link active" href="/books">Książki</a></li>
+                            <li class="navigation__item"><a class="link" href="/orders">Zamówienia</a></li>
+                            <li class="navigation__item"><a class="link" href="/settings">Ustawienia</a></li>
+                            <li class="navigation__item" th:if="${#authorization.expression('hasRole(''ADMIN'')')}"><a class="link admin" href="/admin">Panel Admina</a></li>
+                            <li class="navigation__item"><a href="/shoppingCart"><i class="fas fa-shopping-cart cart"></i><b class="items-counter" th:if="${itemsCount} > 0" th:text="${itemsCount}"></b></a></li>
+                            <li class="navigation__item "><a class ="login-btn" href="/logout">Wyloguj</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="book-table">
+            <table class="content-table">
+                <thead>
+                <tr>
+                    <th><a th:if="${#authorization.expression('hasRole(''ADMIN'')')}" class="reserve-button" href="/books/add">Dodaj książkę</a></th>
+                    <th>Tytuł</th>
+                    <th>Autor</th>
+                    <th>Kategoria</th>
+                    <th>Ilość</th>
+                    <th>Rok</th>
+                    <th>Publikacja</th>
+                    <th>Cena</th>
+                    <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}"></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${books}">
+                    <th class="image"><img th:src="@{/img/book-images/{photo}(photo=${book?.photo})}" alt=""></th>
+                    <th th:text="${book.title}"></th>
+                    <th th:text="${book.author.firstName} + ' ' + ${book.author.lastName}"></th>
+                    <th th:text="${book.category.name}"></th>
+                    <th th:text="${book.quantity}"></th>
+                    <th th:text="${book.publication_year}"></th>
+                    <th th:text="${book.publisher.name}"></th>
+                    <th th:text="${book.price} +' zł'"></th>
+                    <th th:if="${#authorization.expression('hasRole(''ADMIN'')')}" >
+                        <a th:href="@{/books/edit/{id}(id=${book.isbn})}" class="reserve-button edit ">Edytuj</a>
+                        <a th:href="@{/books/delete/{id}(id=${book.isbn})}" class="reserve-button delete">Usuń</a>
+                    </th>
+                    <th>
+                    <!--/*@thymesVar id="id" type="java.lang.String"*/-->
+                    <a th:href="@{/shoppingCart/add/{isbn}(isbn=${book.isbn})}" class="reserve-button">Kup</a>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    </body>
+</html>

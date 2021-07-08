@@ -1,0 +1,21 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title tiles:fragment="title">Potwierdzenie zamówienia</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" th:href="@{/css/orderSuccess.css}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="success-container">
+          <img class="success-logo" th:src="@{/img/success_logo.svg}"/>
+          <h1>Udało się, złożyłeś zamówienie!</h1>
+          <h2>Twoje zgłoszenie  zostało pozytywnie przyjęte. Wysłano wiadomość na skrzynkę pocztową.</b></h2>
+          <a class="continue-link" href="/books">Kontynuuj</a>
+        </div>
+    </body>
+</html>
