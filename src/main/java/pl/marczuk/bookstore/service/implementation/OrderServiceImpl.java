@@ -1,11 +1,14 @@
 package pl.marczuk.bookstore.service.implementation;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.marczuk.bookstore.dto.topDto;
 import pl.marczuk.bookstore.exception.ResourceNotFoundException;
 import pl.marczuk.bookstore.model.Order;
 import pl.marczuk.bookstore.model.OrderLine;
@@ -16,6 +19,8 @@ import pl.marczuk.bookstore.repository.UserRepository;
 import pl.marczuk.bookstore.service.OrderService;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -61,7 +66,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public BigDecimal countSpentMoney() {
-        return orderRepository.sumTotalCostByUser(getCurrentUser());
+        BigDecimal result = orderRepository.sumTotalCostByUser(getCurrentUser()).setScale(2, RoundingMode.HALF_UP);
+        return result;
     }
 
     @Override
@@ -79,6 +85,20 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Integer countOrders() {
         return orderRepository.countByUser(getCurrentUser());
+    }
+
+    @Override
+    public List<topDto> getTop10Buyers() {
+        List<topDto> topDtos = new ArrayList<>();
+        List<String> top10 = orderRepository.findTop10UserByCountUser();
+        int i = 1;
+        for(String userName : top10) {
+            User user = userRepository.findByUsername(userName);
+            Integer value = orderRepository.countByUser(user);
+            topDtos.add(new topDto(i, user.getFirstName() + " " + user.getLastName(), value));
+            i++;
+        }
+        return topDtos;
     }
 
     private User getCurrentUser() {

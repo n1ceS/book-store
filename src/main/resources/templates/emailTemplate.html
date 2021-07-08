@@ -94,6 +94,11 @@
         <h3><strong>Cena:  </strong><span class="highlighted" th:text="${order.orderLineCost}"></span></h3>
     </div>
     <h3>Suma: <strong th:text="${totalCost}">0</strong> zł</h3>
+    <h2>Dane do przelewu:</h2>
+    <h3>Book-Store Adres 12-345 Lublin</h3>
+    <h3>Numer konta: <b>12 3412 3412 3456 7890 1234 5678</b></h3>
+    <h3>Kwota:<b th:text="${totalCost} + ' zł'"></b></h3>
+    <h3>Tytuł przelewu:<b> w tytule należy podać nazwę użytkownika!</b></h3>
     <h3>Pozdrawiamy, <br> Zespół <strong>QRLibrary</strong> </h3>
     <div class="top-banner t2">
         <p>Biblioteka Book-Store</p>

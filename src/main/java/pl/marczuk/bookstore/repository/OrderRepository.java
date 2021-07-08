@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import pl.marczuk.bookstore.model.Order;
 import pl.marczuk.bookstore.model.User;
 
+import java.awt.print.Pageable;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     BigDecimal sumTotalCostByUser(User user);
 
     Integer countByUser(User currentUser);
+    @Query(value = "SELECT  username FROM orders group by username  ORDER BY (Select count(username) from orders) DESC LIMIT 10", nativeQuery = true)
+    List<String> findTop10UserByCountUser();
 }

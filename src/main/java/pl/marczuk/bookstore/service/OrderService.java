@@ -1,5 +1,6 @@
 package pl.marczuk.bookstore.service;
 
+import pl.marczuk.bookstore.dto.topDto;
 import pl.marczuk.bookstore.model.Order;
 
 import java.math.BigDecimal;
@@ -17,4 +18,6 @@ public interface OrderService {
    void delete(Long id);
 
    Integer countOrders();
+
+  List<topDto> getTop10Buyers();
 }

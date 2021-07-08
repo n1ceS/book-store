@@ -67,16 +67,16 @@
                         <tr>
                             <th>Pozycja</th>
                             <th>Użytkownik</th>
-                            <th>Liczba</th>
+                            <th>Liczba zamówień</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th><img src="img/leader_icon.svg"></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                        <tr th:each="top : ${top10buyers}">
+<!--                            <th><img src="img/leader_icon.svg"></th>-->
+                            <th th:text="${top.position}"></th>
+                            <th th:text="${top.name}"></th>
+                            <th th:text="${top.value}"></th>
                         </tr>
                         </tbody>
                     </table>
@@ -89,16 +89,15 @@
                         <tr>
                             <th>Pozycja</th>
                             <th>Książka</th>
-                            <th>Ile razy</th>
+                            <th>Sprzedanych egzemplarzy</th>
 
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <th><img src="img/leader_icon.svg"></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
+                        <tr th:each="top : ${top10books}">
+                            <th th:text="${top.position}"></th>
+                            <th th:text="${top.name}"></th>
+                            <th th:text="${top.value}"></th>
                         </tr>
                         </tbody>
                     </table>
