@@ -24,6 +24,7 @@ public class DashboardController {
         model.addAttribute("itemsCount", shoppingCartService.getItemsCount());
         model.addAttribute("bookCount", bookService.countAllBooks());
         model.addAttribute("moneySpent", orderService.countSpentMoney());
+        model.addAttribute("ordersCount", orderService.countOrders());
         return "dashboard";
     }
 }

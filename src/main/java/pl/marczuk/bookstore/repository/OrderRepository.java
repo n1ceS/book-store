@@ -14,4 +14,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findAllByUser(User currentUser);
     @Query("select sum(o.totalCost) from orders o where o.user=:user")
     BigDecimal sumTotalCostByUser(User user);
+
+    Integer countByUser(User currentUser);
 }

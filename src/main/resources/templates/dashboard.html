@@ -44,15 +44,16 @@
                     <div class="card-block ">
                         <img src="img/returned_books.png" alt="">
                         <h3 class="m-b-20">Koszt zamówień</h3>
-                        <h1 th:text="${moneySpent} + ' zł'"></h1>
+                        <h1 th:if="${moneySpent}"  th:text="${moneySpent} + ' zł'"></h1>
+                        <h1 th:unless="${moneySpent}">0 zł</h1>
                     </div>
                 </div>
 
                 <div class="card bg-c-yellow order-card">
                     <div class="card-block">
                         <img src="img/not_returned_books.png" alt="">
-                        <h3 class="m-b-20">Książki do oddania</h3>
-                        <h1>1</h1>
+                        <h3 class="m-b-20">Liczba Twoich zamówień</h3>
+                        <h1 th:text="${ordersCount}">1</h1>
                     </div>
                 </div>
 

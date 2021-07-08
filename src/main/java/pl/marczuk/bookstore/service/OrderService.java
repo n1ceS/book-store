@@ -15,4 +15,6 @@ public interface OrderService {
    BigDecimal countSpentMoney();
 
    void delete(Long id);
+
+   Integer countOrders();
 }
